@@ -1,0 +1,44 @@
+
+results = {};
+for(var i=0; i<10000; i++)
+{
+    rawData = [1,2,3,4,5,6,7,8,9,10, 11, 12, 13, 14, 15, 16, 17, 18]
+    length = 0;
+    data = {};
+    
+    for(var j=0; j<rawData.length; j++)
+    {
+        length += j;
+        data[length] = rawData[j];
+    }
+    
+    for(var j=0; j<10; j++)
+    {
+        result = pick();
+        if(results[result])
+            results[result] += 1;
+        else
+            results[result] = 1;
+    }
+}
+
+function pick()
+{
+        id = Math.floor( Math.random() * length )
+        var picked;
+        var val = data[0];
+        for(var key in data)
+        {
+            if(id <= key)
+            {
+                picked = data[key];
+                data[key] = val;
+                break;
+            }
+            var tempVal = data[key]
+            data[key] = val;
+            val = tempVal;
+        }
+        data[0] = picked
+        return picked
+}
